@@ -1,0 +1,249 @@
+<!--
+  Invoice template.
+  Styled using Tailwind CSS.
+  Head to the CSS tab to learn more.
+-->
+
+<div class="flex flex-row items-center justify-between ">
+  <div>
+    <img
+      src="https://www.k-gold.shop/wp-content/uploads/2020/11/Picture-1.png"
+    >
+  </div>
+  <div class="w-2/5">
+    <dl class="flex flex-wrap justify-between">
+      <dd class="w-9/12">A: Office 4B, 7/F, Koon Fook Centre, No. 9 Knutsford Terrace,Tsim Sha Tsui</dd>
+  	<dd class="w-9/12">T: +852 67231170</dd>
+  	<dd class="w-9/12">W: www.K-gold.shop</dd>
+  	<dd class="w-9/12">E: hello@k-gold.shop</dd>
+  </div>
+
+  <div class="w-2/5">
+    <h1 class="font-bold mb-2 text-2xl">{% if credit %}Credit{% else %}Sales Note{% endif %}</h1>
+    <dl class="flex flex-wrap justify-between">
+      <dt class="pr-2 w-3/12">Number:</dt>
+      <dd class="w-9/12">{{order.field_invoiceno}}</dd>
+
+      <dt class="pr-2 w-3/12">Date:</dt>
+      <dd class="w-9/12">{{order.date}}</dd>
+      <dt class="pr-2 w-3/12">Staff No.:</dt>
+      <dd class="w-9/12">{{order.field_staffno}}</dd>
+    </dl>
+  </div>
+</div>
+
+
+<div class="items-center flex justify-between">
+  <dl class="flex flex-wrap justify-between ">
+   <!-- <dt class="w-3/12">Customer Name:</dt>
+    <dd class="w-9/12">{{order.field_client}}</dd>
+
+    <dt class="w-3/12">Customer number:</dt>
+    <dd class="w-9/12">{{order.field_clientno}}</dd>
+    <dt class="w-3/12">Contact No.:</dt>
+    <dd class="w-9/12">{{order.field_mobile}}</dd>
+
+
+ <dt class="w-3/12">Rent Start Date:</dt>
+    <dd class="w-9/12">{{order.field_rentfrom}}</dd>
+    <dt class="w-3/12">Rent End Date:</dt>
+    <dd class="w-9/12">{{order.field_rentto}}</dd>-->
+  </dl>
+
+</div>
+
+<table class="border-collapse  numeric-tabular table table-auto w-full">
+  <thead>
+    <tr class="bg-kgold">
+    	<th class="font-normal text-left">Item</th>
+    	<th class="font-normal text-left">Product<br>Code</th>
+      <!--<th class="font-normal text-left">Inventory Code</th>-->
+      <th class="font-normal text-left">Description</th>
+      <th class="font-normal text-left">Metal</th>
+      <th class="font-normal text-right">Weight<br>(g)</th>
+      <th class="font-normal text-right">Weight<br>(Tael)</th>
+      <th class="font-normal text-right">Unit price<br>(HKD)</th>
+      <th class="font-normal text-right">Discount %</th>
+      <th class="font-normal text-right">Amount<br>(HKD)</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for product in order.row %}
+      <tr class="">
+        <td class="text-left">{{product.index}}</td>
+        <td class="text-left">{{product.productIdValue}}</td>
+        <!--<td class="text-left"></td>-->
+        <td class="text-left">{{product.desc}}</td>
+        <td class="text-left">{{product.metal}}</td>
+
+        {% if product.weight !="" and product.weight !="0.0" %}
+        <td class="text-right">{{product.weight}} </td>
+        <td class="text-right">{{product.weight | divided_by: 37.429 | round: 3 |format: "%.3f"}}</td>
+        {% else %}
+        <td class="text-right"></td>
+        <td class="text-right"></td>
+        {% endif %}
+
+
+        <td class="text-right">{{product.unitPriceValue}}</td>
+        <td class="text-right">{{product.discount}}</td>
+        <td class="text-right">{{product.subTotal}}</td>
+
+      </tr>
+    {% endfor %}
+    <!-- Adding empty row to always have a minimum of 12 product rows -->
+    {% for n in (products.size..1) %}
+
+        <td>&nbsp;</td>
+
+
+
+    {% endfor %}
+</table>
+
+<table class="border-collapse mb-2 numeric-tabular table table-auto w-full">
+  <thead>
+    <tr class="bg-kgold">
+    	<th class="font-normal text-left"></th>
+    	<th class="font-normal text-left"></th>
+    	<th class="font-normal text-left"></th>
+      <th class="font-normal text-left"></th>
+      <th class="font-normal text-right">Weight<br>(g)</th>
+      <th class="font-normal text-right">Weight<br>(Tael)</th>
+      <th class="font-normal text-right">Flat Discount (HKD)</th>
+      <th class="font-normal text-right">Amount<br>(HKD)</th>
+    </tr>
+  </thead>
+
+  <tbody>
+  	 <td class="font-normal text-left"></td>
+    	<td class="font-normal text-left"></td>
+    	<td class="font-normal text-left"></td>
+      <td class="font-normal text-left">Total</td>
+      <td class="font-normal text-right">{{order.totalWeight}}</td>
+      <td class="font-normal text-right">{{order.field_totaltael}}</td>
+      <td class="font-normal text-right">{{order.field_discount}}</td>
+      <td class="font-normal text-right">{{order.total | money: 'en'}}</td>
+  <tbody>
+
+</table>
+
+<table class="border-collapse mb-2 numeric-tabular table table-auto w-full">
+  <thead>
+    <tr class="">
+    	<th class="font-normal text-left"><b>PAYMENT</b></th>
+    </tr>
+  </thead>
+
+  <tbody>
+  <tr class="bg-kgold">
+		<td class="text-left">Type</td>
+  	<td class="text-right">Total(HKD)</td>
+  </tr>
+  <tbody>
+  <tbody>
+  <tr>
+		<td class="text-left">{{order.field_paymenttype}}</td>
+  	<td class="text-right">{{order.total | money: 'en'}}</td>
+  </tr>
+  <tbody>
+
+</table>
+<br>
+<!--<table class="border-collapse mb-2 numeric-tabular table table-auto w-full">
+<thead>
+    <tr class="">
+    	<th class="font-normal text-left"><b>REFERENCE DEPOSIT</b></th>
+    </tr>
+  </thead>
+
+  <tbody>
+  <tr class="bg-kgold">
+		<td class="text-left">Total Tael</td>
+  	<td class="text-left">Gold Sell Price</td>
+  	<td class="text-left">Discount %</td>
+  	<td class="text-left">Flat Discount (HKD)</td>
+  	<td class="text-right">Total(HKD)</td>
+  </tr>
+  <tbody>
+  <tbody>
+  <tr>
+		<td class="text-left">{{order.field_totaltael}}</td>
+  	<td class="text-left">{{order.field_goldprice}}</td>
+  	<td class="text-left">{{order.field_deposit_discount_percentage}}</td>
+  	<td class="text-left">{{order.field_deposit_discount}}</td>
+  	<td class="text-right">{{order.field_total_deposit | money: 'en'}}</td>
+  </tr>
+  <tbody>
+
+
+</table>-->
+
+
+<hr>
+
+
+
+
+
+<p class="mt-4 text-left small-text" style="letter-spacing:-0.5px;">
+The customer confirm their agreement to and acceptance of the terms and conditions of this agreement stated herein and printed overleaf.										<br>
+客戶現確認同意及接受本頁列明及其背面列明之條款及細則。										<br><br>
+
+<b>Terms & Conditions 條款及細則</b>	<br>
+<br>
+1.	There is no return or exchange of goods.<br>
+貨品不設退換。<br>
+2.	Gold Weight: 1 tael troy = 37.429g = 1.203 37 ounces troy (Hong Kong Legislation Cap. 68 WEIGHTS AND MEASURES ORDINANCE)<br>
+黃金重量： 1金衡兩 = 37.429克 = 1.203 37金衡安士 (香港法例第68章 《度量衡條例》)<br>
+3.	Gold is a soft precious metal and may become deformed or scratched after prolonged wear. Please avoid rough handling.<br>
+黃金質軟，長期佩戴、碰撞或擠壓會較易造成變形或表面磨損，應小心佩帶。<br>
+
+
+<!--										<br>-->
+<!--<b>Personal Information Collection Statement	</b>									<br>-->
+<!--We are committed to protect your personal data (the “Data”). This Personal Information Collection Statement is to notify you of certain matter on or before collecting Data from you in compliance with the Personal Data (Privacy) Ordinance of the Hong Kong SAR. We limit the collection and use of the Data to the specific information we need to administer our business and provide highest quality services to you.<br>-->
+<!--We may use the Data for one or more of the following purposes:<br>-->
+<!--1. for provisions of goods, facilities or services provided by us;<br>-->
+<!--2. for statistics, communication, marketing, promotional, customer relationship management, public relations and/or direct marketing purposes;<br>-->
+<!--3. for application, creation, operation and administration of accounts and records for customers, members or users;<br>-->
+<!--4. to handle comments, enquiries and complaints;<br>-->
+<!--5. to process billing and payment;<br>-->
+<!--6. for identification and verification purposes;  <br>-->
+<!--7. any other purposes as specified in a personal information collection statement when your Data is being collected or any other purposes which you may from time to time agree.<br>-->
+<!--We may share and/or transfer the Data with our third party service providers, agents and contractors for the above purposes for us. We may also disclose the Data when required by law or court order, or as requested by any government or law enforcement authorities, or in good faith that disclosure is necessary or advisable to protect the rights or properties of us or other persons.<br>-->
+<!--We intend to use the Data for direct marketing purposes in relation to the goods and services. However, we may not do so unless we have received your consent for that purpose. In this connection, we may use the following Data:<br>-->
+<!--(a) name and contact details;<br>-->
+<!--(b) products and services portfolio information; and<br>-->
+<!--(c) demographic information.<br>-->
+<!-- <br>-->
+<!--The provision of the Data is voluntary. However, if you elect not to provide the Data to us, we may not be able to supply you with the relevant information or services or to process your request. <br>-->
+<!--<br>-->
+<!--Consent will be sought from you for such use of the Data in direct marketing as described above. Please indicate your agreement or objection to such use of the Data in direct marketing as described above before providing the Data to us. You may also subsequently write to us by email to hello@k-gold.shop to opt-out from direct marketing or any other purposes above at any time.<br>-->
+<!--<br>-->
+<!--The person to whom requests for access to Data or correction of Data or for information regarding our Privacy Policy should be addressed to our Data Officer at:<br>-->
+<!--Office 4B, 7/B, Koon Fook Centre, No.9 Knutsford Terrace, Tsim Sha Tsui, Kowloon<br>-->
+<!--In case of any discrepancy between the English and Chinese versions, the English version shall prevail."										<br>-->
+<!--<b>個人資料收集聲明	</b>									<br>-->
+<!--"我們致力保護你的個人資料(“個人資料”)。此個人資料收集聲明是依從香港特別行政區之《個人資料(私隱)條例》之要求，於向你收集個人資料時或之前通知你若干事項。我們所收集及使用的個人資料只限用於我們業務所需及向你提供最高服務質素的範圍內。<br>-->
+
+<!--我們可使用個人資料於下列一項或多項的用途：<br>-->
+<!--1. 由我們所提供的貨品、設施及/或服務；<br>-->
+<!--2. 資料統計、通訊、市場營銷、推廣、客戶關係管理、公共關係及/或直接促銷；<br>-->
+<!--3. 客戶、會員或使用者帳戶及記錄的申請、成立、運作及行政管理；<br>-->
+<!--4. 處理意見、查詢及投訴；<br>-->
+<!--5. 處理帳單及付款；<br>-->
+<!--6. 識別及核實身份；<br>-->
+<!--7. 載於收集你的個人資料時所提供的個人資料收集聲明中的任何其他目的，或你可能不時同意的任何其他目的。<br>-->
+<!--我們可能提供及/或分享個人資料予我們的第三方服務供應商、代理及承包商為我們作上述用途。我們亦可能基於以下情況透露個人資料：法律所需，法庭命令，政府或執法機構所需或懇切相信因保障我們或其他人仕的權利或資產而有必要或被建議透露個人資料。<br>-->
+<!--我們擬使用個人資料以直接促銷指定產品及服務，但我們在未得到你的同意之前，不可如此使用個人資料。就此，我們可能使用以下個人資料：<br>-->
+<!--(a) 名稱及聯絡資料；<br>-->
+<!--(b) 產品及服務資訊；及<br>-->
+<!--(c) 統計資料。<br>-->
+<!--個人資料的提供完全是自願性質。然而，如你選擇不向我們提供個人資料，則我們可能無法為你提供有關的資訊或服務，或處理你的要求。<br>-->
+<!--我們會徵求你的同意使用個人資料作上述直接促銷用途。請你於提供個人資料前，表示你同意或反對我們如此使用個人資料作上述直接促銷用途。你亦可於之後的任何時候電郵至hello@k-gold.shop，要求我們停止使用個人資料作直接促銷用途或上述任何其他用途。<br>-->
+<!--如要提出查閱或更正個人資料的要求，或查詢有關我們私隱政策，可向我們的個人資料主任提出：<br>-->
+
+<!--九龍尖沙咀諾士佛臺9號冠福中心7樓4B室<br>-->
+<!--中英文本如有歧異，一概以英文本為準。<br>-->
+<!--</p>-->

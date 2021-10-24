@@ -1,0 +1,153 @@
+{
+  "id": "RI-20201217-D4DH2",
+  "_id": "RI-20201217-D4DH2",
+  "order": {
+    "row": [
+      {
+        "productIdValue": "BG001",
+        "desc": "龍鳳镯",
+        "metal": "AU999.9",
+        "weight": "38",
+        "unitPriceValue": "1550",
+        "discount": "10",
+        "subTotal": "1395.00",
+        "index": 1
+      },
+      {
+        "productIdValue": "BG002",
+        "desc": "龍鳳鐲",
+        "metal": "AU999.9",
+        "weight": "37",
+        "unitPriceValue": "1550",
+        "discount": "10",
+        "subTotal": "1395.00",
+        "index": 2
+      },
+      {
+        "productIdValue": "BG003",
+        "desc": "龍鳳鐲",
+        "metal": "AU999.9",
+        "weight": "35.7",
+        "unitPriceValue": "1550",
+        "discount": "10",
+        "subTotal": "1395.00",
+        "index": 3
+      },
+      {
+        "productIdValue": "BG004",
+        "desc": "龍鳳鐲",
+        "metal": "AU999.9",
+        "weight": "42.1",
+        "unitPriceValue": "1550",
+        "discount": "10",
+        "subTotal": "1395.00",
+        "index": 4
+      },
+      {
+        "productIdValue": "NL001",
+        "desc": "頸鏈",
+        "metal": "AU999.9",
+        "weight": "38.2",
+        "unitPriceValue": "1680",
+        "discount": "10",
+        "subTotal": "1512.00",
+        "index": 5
+      },
+      {
+        "productIdValue": "RG001",
+        "desc": "戒指",
+        "metal": "AU999.9",
+        "weight": "12.3",
+        "unitPriceValue": "430",
+        "discount": "10",
+        "subTotal": "387.00",
+        "index": 6
+      },
+      {
+        "productIdValue": "NL002",
+        "desc": "頸鏈",
+        "metal": "AU999.9",
+        "weight": "39.6",
+        "unitPriceValue": "1380",
+        "discount": "10",
+        "subTotal": "1242.00",
+        "index": 7
+      },
+      {
+        "productIdValue": "RG002",
+        "desc": "戒指",
+        "metal": "AU999.9",
+        "weight": "13.4",
+        "unitPriceValue": "430",
+        "discount": "10",
+        "subTotal": "387.00",
+        "index": 8
+      },
+      {
+        "productIdValue": "RG003",
+        "desc": "戒指",
+        "metal": "AU999.9",
+        "weight": "14.7",
+        "unitPriceValue": "430",
+        "discount": "10",
+        "subTotal": "387.00",
+        "index": 9
+      },
+      {
+        "productIdValue": "BG006",
+        "desc": "龍鳳鐲",
+        "metal": "AU999.9",
+        "weight": "39.5",
+        "unitPriceValue": "1880",
+        "discount": "10",
+        "subTotal": "1692.00",
+        "index": 10
+      },
+      {
+        "productIdValue": "BG007",
+        "desc": "龍鳳鐲",
+        "metal": "AU999.9",
+        "weight": "39.6",
+        "unitPriceValue": "1880",
+        "discount": "10",
+        "subTotal": "1692.00",
+        "index": 11
+      },
+      {
+        "productIdValue": "RG003",
+        "desc": "戒指",
+        "metal": "AU999.9",
+        "weight": "11.9",
+        "unitPriceValue": "430",
+        "discount": "10",
+        "subTotal": "387.00",
+        "index": 12
+      }
+    ],
+    "date": "17-12-2020",
+    "total": "14040",
+    "field_iddoc": null,
+    "totalWeight": "60",
+    "field_client": "Test123",
+    "field_mobile": "123456",
+    "field_rentto": "19-12-20",
+    "field_details": null,
+    "field_staffno": "WW",
+    "field_clientno": "123456",
+    "field_discount": "0.00",
+    "field_discount_percentage": "0.00%",
+    "field_rentfrom": "19-12-20",
+    "field_goldprice": "528.467",
+    "field_invoiceno": "IR200001",
+    "field_totaltael": "10.428",
+    "field_paymenttype": "Visa",
+    "field_deposit_discount_percentage": "10%",
+    "field_deposit_discount": "10",
+
+    "field_total_deposit": 206260.67
+  },
+  "status": "draft",
+  "duedate": "2020-12-20T06:14:28.432Z",
+  "updateAt": "2020-12-17T06:14:16.234Z",
+  "createdAt": "2020-12-17T06:14:16.234Z"
+}
